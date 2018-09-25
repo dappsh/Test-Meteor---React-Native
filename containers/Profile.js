@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity } from 'react-native'
+import {  StyleSheet, AsyncStorage, TouchableOpacity } from 'react-native'
 import { Card, Avatar } from 'react-native-elements';
-import { Container, Button } from 'native-base';
+import { Container, View, Text, Button } from 'native-base';
 import Header from './../component/Header';
 import Axios from 'axios'
 
@@ -94,10 +94,10 @@ class profile extends Component {
                     flex: 1,
                     flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'space-between'
                 }}>
 
-                    <Text>{userName}</Text>
+                    <Text style={{fontWeight: 'bold', paddingTop: 5}}>{userName.toUpperCase()}</Text>
                     <Text>{userIdCard}</Text>
                     <Text>{userPhone}</Text>
                     <Text>{userEmail}</Text>
