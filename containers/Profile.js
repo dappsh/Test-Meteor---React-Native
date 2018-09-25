@@ -68,7 +68,7 @@ class profile extends Component {
 
 
     logOut = () => {
-        alert('jalan duluan ga?')
+
         AsyncStorage.removeItem('userToken')
         this.props.navigation.navigate('Login')
     }
@@ -115,7 +115,7 @@ class profile extends Component {
                     <Text style={{ color: '#EE3124' }}>CHANGE PASSWORD</Text>
 
 
-                    <TouchableOpacity ><Text style={{ color: '#EE3124' }}>SIGN OUT</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{this.logOut()}}><Text style={{ color: '#EE3124' }}>SIGN OUT</Text></TouchableOpacity>
 
 
                 </View>
