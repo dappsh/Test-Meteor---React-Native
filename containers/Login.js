@@ -9,7 +9,6 @@ import {
   Label,
   Text,
   Button,
-  Right,
 } from 'native-base';
 
 import axios from 'axios';
@@ -91,12 +90,12 @@ class Login extends Component {
           PRE-TEST RN
         </Text>
 
-        <View style={{flexDirection: 'column'}}>
+        <View style={{ flexDirection: 'column' }}>
 
           <Form style={{ paddingBottom: 50 }}>
             <Item floatingLabel >
-            <Label>Email Address</Label>
-            <Input onChangeText={(userInput) => { this.setState({ email: userInput }) }} />
+              <Label>Email Address</Label>
+              <Input onChangeText={(userInput) => { this.setState({ email: userInput }) }} />
             </Item>
             <Item floatingLabel >
               <Label>Password </Label>

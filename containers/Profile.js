@@ -48,8 +48,8 @@ class profile extends Component {
                         this.setState({
                             userName: getData.data.message.data.name,
                             userPhoto: getData.data.message.data.photo,
-                            userIdCard: getData.data.message.data.cavasser.idcard,
-                            coordinator: getData.data.message.data.cavasser.user_coordinator.name,
+                            userIdCard: getData.data.message.data.canvasser.idcard,
+                            coordinator: getData.data.message.data.canvasser.user_coordinator.name,
                             userPhone: getData.data.message.data.phone,
                             userEmail: getData.data.message.data.email,
                             userStatus: 'Active'
@@ -68,7 +68,6 @@ class profile extends Component {
 
 
     logOut = () => {
-
         AsyncStorage.removeItem('userToken')
         this.props.navigation.navigate('Login')
     }
@@ -85,13 +84,10 @@ class profile extends Component {
                 <Header judul={teks} fungsingBack={() => this.props.navigation.goBack()} />
 
                 <View style={styles.container}>
-                    <Card>
                         <Avatar
                             source={{ uri: `${userPhoto}` }}
                             rounded
                             xlarge />
-
-                    </Card>
                 </View>
 
                 <View style={{
@@ -132,10 +128,10 @@ export default profile
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ecf0f1',
+        // justifyContent: 'center',
+        backgroundColor: '#EE3124',
     },
 
 });
