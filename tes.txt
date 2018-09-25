@@ -1,0 +1,132 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+const instructions = Platform.select({
+  ios: 'Press Cmd+R to reload,\n' +
+    'Cmd+D or shake for dev menu',
+  android: 'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
+});
+
+type Props = {};
+export default class App extends Component<Props> {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
+        <Text style={styles.instructions}>
+          To get started, edit App.js
+        </Text>
+        <Text style={styles.instructions}>
+          {instructions}
+        </Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
+
+
+constructor() {
+    super();
+    this.state = {
+      penerima: "",
+      subject: "",
+      pesan: ""
+    };
+  }
+
+
+  send() {
+    var url = `http://192.168.5.3:3210/sendemail`;
+    axios.post(url, {
+      terima: this.state.penerima,
+      judul: this.state.subject,
+      emailpesan: this.state.pesan
+    }).then((x) => {
+      alert(x.data)
+    }).catch((y) => { alert(y.data) })
+  }
+
+
+  render() {
+    return (
+
+      <Container>
+
+
+        <Content>
+          <Form>
+            <Item floatingLabel>
+              <Label>Email Address </Label><Input onChangeText={(x) => { this.setState({ penerima: x }) }} />
+            </Item>
+            <Item floatingLabel>
+              <Label>Password </Label><Input onChangeText={(x) => { this.setState({ subject: x }) }} />
+            </Item>
+            <Label>Forget your password? </Label><Input onChangeText={(x) => { this.setState({ subject: x }) }} />
+          </Form>
+
+
+          <Button
+            // onPress={klik}
+            title="LOGIN"
+            color="purple"
+            style={styles.button}
+          ></Button>
+
+
+  
+
+        </Content>
+
+
+      </Container>
+
+    )
+  }
+}
+
+
+const styles = StyleSheet.create({
+  // container: {
+  // flex: 1,
+  // justifyContent: 'center',
+  // paddingHorizontal: 30
+  // },
+  button: {
+  alignItems: 'center',
+  backgroundColor: '#DDDDDD',
+  padding: 20
+  }
+  })
