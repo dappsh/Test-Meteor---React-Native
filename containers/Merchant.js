@@ -78,7 +78,7 @@ class merchant extends Component {
                             paddingLeft: 10
                         }}>
                             <Content>
-                                <Text color="#EE3124">{merchName.toUpperCase()}</Text>
+                                <Text style={{ fontWeight: 'bold'}}>{merchName.toUpperCase()}</Text>
                                 <Text>{merchAdd}</Text>
                                 <Text>Distance</Text>
                             </Content>

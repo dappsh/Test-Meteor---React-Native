@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, AsyncStorage, TouchableOpacity } from 'react-native'
+
+import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity } from 'react-native'
+import { Card, Avatar } from 'react-native-elements';
+import { Container, Button } from 'native-base';
 import Header from './../component/Header';
-import {
-    Container, View, Text, Content, Button, Icon, Left, Body, Right, Title
-} from 'native-base';
 import Axios from 'axios'
 
 
@@ -11,10 +11,16 @@ import Axios from 'axios'
 class profile extends Component {
     constructor() {
         super()
-        this.state = { dataUser: [] }
+        this.state = {
+            userName: '',
+            userPhoto: '',
+            userIdCard: '',
+            coordinator: '',
+            userPhone: '',
+            userEmail: '',
+            userStatus: ''
+        }
     }
-
-
     componentDidMount() {
         // Cek sudah login atau belum 
         console.log('MASUK KE MERCHANT')
@@ -28,8 +34,8 @@ class profile extends Component {
             console.log('USER TOKEN PAGE PROFILE', result)
             if (result) {
                 this.setState({ userTok: result })
-                alert('JALAN')
-                console.log('Cek user tokennya <3', this.state.userTok)
+                // alert('JALAN')
+                console.log('Cek user tokennya', this.state.userTok)
 
                 let url = `https://serviceapi.myboost.id/canvasser/v1/profile`;
                 //SET AUTHORIZATION
@@ -39,11 +45,11 @@ class profile extends Component {
 
                 Axios.get(url, config)
                     .then((getData) => {
-                        alert('Ajeng get data')
                         this.setState({
                             userName: getData.data.message.data.name,
-                            // userIdCard: getData.data.message.data.cavasser
-                            // coordinator: getData.data.message.data.cavasser.user_coordinator.name,
+                            userPhoto: getData.data.message.data.photo,
+                            userIdCard: getData.data.message.data.cavasser.idcard,
+                            coordinator: getData.data.message.data.cavasser.user_coordinator.name,
                             userPhone: getData.data.message.data.phone,
                             userEmail: getData.data.message.data.email,
                             userStatus: 'Active'
@@ -53,43 +59,24 @@ class profile extends Component {
                     .catch((error) => {
                         console.log(error)
                     })
-
             }
         }
 
         );
 
+    };
+
+
+    logOut = () => {
+        alert('jalan duluan ga?')
+        AsyncStorage.removeItem('userToken')
+        this.props.navigation.navigate('Login')
     }
-
-
-    // logOut = () => {
-    //     AsyncStorage.removeItem('userToken')
-    //     // this.props.navigation.navigate('Login')
-    // }
 
     render() {
         var teks = 'Profile'
 
-        const { userName, userIdCard, coordinator, userPhone, userStatus, userEmail } = this.state
-
-        // return (
-
-        //     <Content>
-        //                 <Text>{userName}</Text>
-        //                 <Text>{userIdCard}</Text>
-        //                 <Text>{userPhone}</Text>
-        //                 <Text>{userEmail}</Text>
-        //                 <Text noted>Status</Text>
-        //                 <Text>{userStatus}</Text>
-        //                 <Text noted>Coordinator</Text>
-        //                 <Text>{coordinator}</Text>
-        //             </Content>
-
-        // )
-        // })
-
-
-
+        const { userName, userIdCard, coordinator, userPhone, userStatus, userEmail, userPhoto } = this.state
 
 
         return (
@@ -97,6 +84,15 @@ class profile extends Component {
 
                 <Header judul={teks} fungsingBack={() => this.props.navigation.goBack()} />
 
+                <View style={styles.container}>
+                    <Card>
+                        <Avatar
+                            source={{ uri: `${userPhoto}` }}
+                            rounded
+                            xlarge />
+
+                    </Card>
+                </View>
 
                 <View style={{
                     flex: 1,
@@ -105,10 +101,6 @@ class profile extends Component {
                     justifyContent: 'center'
                 }}>
 
-
-
-                    {/* {data} */}
-                    {/* <Text>{userName}</Text> */}
                     <Text>{userName}</Text>
                     <Text>{userIdCard}</Text>
                     <Text>{userPhone}</Text>
@@ -117,8 +109,9 @@ class profile extends Component {
                     <Text>{userStatus}</Text>
                     <Text noted>Coordinator</Text>
                     <Text>{coordinator}</Text>
-
-                    <Button style={{ backgroundColor: '#EE3124' }}><Text>EDIT PROFILE</Text></Button>
+                    <View>
+                        <Button style={{ backgroundColor: '#EE3124' }}><Text>EDIT PROFILE</Text></Button>
+                    </View>
                     <Text style={{ color: '#EE3124' }}>CHANGE PASSWORD</Text>
 
 
@@ -136,3 +129,13 @@ class profile extends Component {
     }
 }
 export default profile
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ecf0f1',
+    },
+
+});
